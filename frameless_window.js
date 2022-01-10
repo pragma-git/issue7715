@@ -1,8 +1,4 @@
 
-// CHANGE THIS :
-const pathToGitRepo = '/Users/jan/Desktop/test-repo';
-
-
 /**
  * This code shows the problem with issue #7715 on NWJS
  * 
@@ -41,7 +37,7 @@ async function _update(){
         var startTime = performance.now();
         
         var isRepo;
-        await simpleGit( pathToGitRepo ).checkIsRepo(onCheckIsRepo);
+        await simpleGit().checkIsRepo(onCheckIsRepo);
         function onCheckIsRepo(err, checkResult) { 
             isRepo = checkResult
             console.log(' ');
