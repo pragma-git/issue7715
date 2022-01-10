@@ -1,6 +1,6 @@
 
 /**
- * This code shows the problem with issue #7715 on NWJS
+ * This code shows the problem with issue #7715 on NWJS -- version 2, showing that a child process is the problem
  * 
  * Go into folder with package.json, and run below commands.  Time spend is shown in window.
  * 
@@ -27,23 +27,12 @@ window.onload = function() {
 //
 
 
-const simpleGit = require('simple-git');  // npm install simple-git
+var startTime = performance.now();
 
-const delayInMs = 1000;
-window.setInterval( _update, delayInMs ); // continuously call _update
+const { exec } = require("child_process")
+exec('git')
 
-async function _update(){
-    
-        var startTime = performance.now();
-        
-        var isRepo;
-        await simpleGit().checkIsRepo(onCheckIsRepo);
-        function onCheckIsRepo(err, checkResult) { 
-            isRepo = checkResult
-            console.log(' ');
-            console.log(`_update took ${ performance.now() - startTime} ms (at onCheckIsRepo)`); 
-            document.getElementById('time').innerText = `${ performance.now() - startTime} ms`;
-        }
-        
-        
-}
+
+console.log(' ');
+console.log(`_update took ${ performance.now() - startTime} ms (at _update3)`); 
+document.getElementById('time').innerText = `${ performance.now() - startTime} ms`;
