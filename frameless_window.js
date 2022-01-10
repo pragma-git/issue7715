@@ -27,23 +27,22 @@ window.onload = function() {
 //
 
 
-const simpleGit = require('simple-git');  // npm install simple-git
-
 const delayInMs = 1000;
 window.setInterval( _update, delayInMs ); // continuously call _update
 
 async function _update(){
     
-        var startTime = performance.now();
-        
-        var isRepo;
-        await simpleGit().checkIsRepo(onCheckIsRepo);
-        function onCheckIsRepo(err, checkResult) { 
-            isRepo = checkResult
-            console.log(' ');
-            console.log(`_update took ${ performance.now() - startTime} ms (at onCheckIsRepo)`); 
-            document.getElementById('time').innerText = `${ performance.now() - startTime} ms`;
-        }
+
+    var startTime = performance.now();
+    
+    const { exec } = require("child_process")
+    exec('git', (error, stdout, stderr) => { console.log(stdout); });
+    
+    
+    console.log(' ');
+    console.log(`_update took ${ performance.now() - startTime} ms (at _update3)`); 
+    document.getElementById('time').innerText = `${ performance.now() - startTime} ms`;
+
         
         
 }
