@@ -40,14 +40,16 @@ async function _update(){
     console.log(Date.now() + ' (start time)');
     
     const { exec } = require("child_process")
-    let child = exec('echo "$(date +%s%100) (bash time)"; echo "$(date +%s%100) (bash time)" ', (error, stdout, stderr) => { console.log(stdout); });
-    child.stdout.pipe(process.stdout)
+    let child = exec('echo OUTPUT ', (error, stdout, stderr) => { console.log(stdout); });
 
     child.on('close', (code) => {
-      console.log(Date.now() + ' (child exit time)');
+        console.log(Date.now() + ' (child exit time)');
     });
 
-    console.log(`_update took ${ performance.now() - startTime} ms (at _update3)`); 
+    console.log(Date.now() + ' (done time)');
+
+
+    //console.log(`_update took ${ performance.now() - startTime} ms (at _update3)`); 
     document.getElementById('time').innerText = `${ performance.now() - startTime} ms`;
    
         
