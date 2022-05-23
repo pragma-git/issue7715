@@ -27,7 +27,7 @@ window.onload = function() {
 //
 
 
-const delayInMs = 1000;
+const delayInMs = 3000;
 window.setInterval( _update, delayInMs ); // continuously call _update
 
 async function _update(){
@@ -37,16 +37,21 @@ async function _update(){
     console.log(' ');        
 
     var startTime = performance.now();
-    console.log(Date.now() + ' (start time)');
+    //console.log(Date.now() + ' (start time)');
     
     const { exec } = require("child_process")
-    let child = exec('echo "$(date +%s%100) (bash time)"', (error, stdout, stderr) => { console.log(stdout); });
+    let child = exec('echo "$(date +%s%100) (bash time)"', (error, stdout, stderr) => { 
+            //console.log(stdout); 
+        }
+    );
 
     child.on('close', (code) => {
-        console.log(Date.now() + ' (child exit time)');
+        //console.log(Date.now() + ' (child exit time)');
+        console.log(`Close: ${ performance.now() - startTime} ms`);
     });
 
-    console.log(Date.now() + ' (done time)');
+    //console.log(Date.now() + ' (done time)');
+    console.log(`Done : ${ performance.now() - startTime} ms`);
 
 
     //console.log(`_update took ${ performance.now() - startTime} ms (at _update3)`); 
